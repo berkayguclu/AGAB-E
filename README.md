@@ -6,6 +6,6 @@ Projenin geliştiricileri:
 - Furkan Bozacı'dır.
 
 ## TO-DO 
-[] Database tasarımı
-[] Arayüz tasarımı 
+[ ] Database tasarımı
+[ ] Arayüz tasarımı 
 
