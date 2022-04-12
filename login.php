@@ -42,11 +42,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                             header("location: mainpage.php");
                         } else {
-                            $login_err = "Invalid username or password.";
+                            $login_err = "Yanlış parola veya kullanıcı adı girdiniz!";
                         }
                     }
                 } else {
-                    $login_err = "Invalid username or password.";
+                    $login_err = "Yanlış parola veya kullanıcı adı girdiniz!";
                 }
             } else {
                 echo "There is some DB ERROR!";
@@ -57,9 +57,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mysqli_close($conn);
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,21 +81,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <h2>GİRİŞ YAP!</h2>
             <?php
                 if(!empty($login_err)){
-                    echo '<div>' . $login_err . '</div>';
+                    echo '<div class="error">' . $login_err . '</div>';
                 }
             ?>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="container">
                   <label for="uname"><b>Kullanıcı Adı</b></label>
-                  <input type="text" placeholder="Kullanıcı Adını Giriniz!" name="uname" value="<?php echo $username; ?>" required>
+                  <input class="furkan" type="text" placeholder="Kullanıcı Adını Giriniz!" name="uname" required>
                   <span><?php echo $username_err; ?></span>
 
                   <label for="psw" class="sifre"><b>Şifre</b></label>
-                  <input type="password" placeholder="Şifreniz Giriniz!" name="pass" required>
+                  <input class="furkan" type="password" placeholder="Şifreniz Giriniz!" name="pass" required>
                   <span><?php echo $password_err; ?></span>
 
-                  <button type="submit">Giriş!</button>
+                  <button class="giris" type="submit">Giriş!</button>
                 </div>
 
               </form>
