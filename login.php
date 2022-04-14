@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: mainpage.php");
+    header("location: dersler.php");
     exit;
 }
 
@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(empty($username_err) && empty($password_err)){
-        $sql = "SELECT id, auth, username, password FROM users WHERE username = ?";
+        $sql = "SELECT id, auth, student_id, username, password FROM users WHERE student_id = ?";
 
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_username);
@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    mysqli_stmt_bind_result($stmt, $id, $auth, $username, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $id, $auth, $student_id, $username, $hashed_password);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             session_start();
@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;
                             $_SESSION["auth"] = $auth;
 
-                            header("location: mainpage.php");
+                            header("location: dersler.php");
                         } else {
                             $login_err = "Yanlış parola veya kullanıcı adı girdiniz!";
                         }
