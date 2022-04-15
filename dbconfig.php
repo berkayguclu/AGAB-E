@@ -2,7 +2,7 @@
 $dbServer = '<server>';
 $dbUser = '<user>';
 $dbPass = '<pass>';
-$dbName = '<database>';
+$dbName = '<db_name>';
 
 $conn = mysqli_connect($dbServer, $dbUser, $dbPass, $dbName);
 if (!($conn)){

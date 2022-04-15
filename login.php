@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap" rel="stylesheet">
@@ -103,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             <div class="panel1">
                 <section class="logo">
-                    <img src="kisspng-grumpy-cat-kitten-dog-computer-icons-cats-vector-5add3d779a1414.4545438515244486316311.png" alt="">
+                    <img src="./img/cat.png" alt="cat">
                 </section>
                 <h1>AGAB-E</h1>
                 <div style="text-align:center"><h3>Eğitim için Yenilikçi Çözümler <br> Üretir</h3></div>

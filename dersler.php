@@ -17,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agab-E - DERSLER</title>
-    <link rel="stylesheet" href="dersler.css">
+    <link rel="stylesheet" href="./css/dersler.css">
 </head>
 <body>
     <nav class="nav">
@@ -28,7 +28,7 @@
               <a href="#">Anasayfa</a>
             <?php
                 if($_SESSION["auth"]==1){
-                    echo "<a href='#'>Yönetim Paneli</a>";
+                    echo "<a href='./panel.php'>Yönetim Paneli</a>";
                     echo "<a href='#'>Oluştur</a>";
                 }
             ?>
@@ -50,7 +50,7 @@
         while ($row = mysqli_fetch_assoc($result)){
             echo "<a class='dersler1' href='/mainpage.php'><div>";
             echo "<h2>" . $row["course_name"] . "</h2>";
-            echo "</div></a>";
+            echo "</div></a>\n";
         }
     ?>
     </section>

@@ -2,13 +2,6 @@
     session_start();
     require_once "dbconfig.php";
     date_default_timezone_set('Europe/Istanbul');
-    $ownedFiles = $othersFiles = array();
-
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-        header("location: login.php");
-        exit;
-    }
-    echo 'You are welcome ' . htmlspecialchars($_SESSION["username"]);
 
     $id = $_SESSION["id"];
     $timeCheck=time()-300;
@@ -16,83 +9,229 @@
 
     $sql="UPDATE users SET last_active='$time' WHERE id = $id";
     $run = mysqli_query($conn, $sql);
-
-
-    if($_SESSION["auth"]==1){
-        $sql = "SELECT users.username ,files.filename, files.created_at FROM users, files WHERE users.id = files.owner_id AND (users.id = $id OR users.auth = 0 )";
-    } else{
-        $sql = "SELECT users.username ,files.filename, files.created_at FROM users, files WHERE users.id = files.owner_id AND (users.id = $id OR users.auth = 1)";
-    }
-    $result = mysqli_query($conn, $sql);
-
-    if(!empty($result)){
-        while ($row = mysqli_fetch_assoc($result)){
-            if($row["username"]==$_SESSION["username"]){
-                $line =  $row["filename"] . "  |  " . $row["created_at"] . " <a href='uploads/" . $row["filename"] . "'>Download </a><br>";
-                array_push($ownedFiles, $line);
-            } else{
-                $line = $row["username"] . "  |  " . $row["filename"] . "  |  " . $row["created_at"] . " <a href='uploads/" . $row["filename"] . "'>Download </a><br>";
-                array_push($othersFiles, $line);
-            }
-        }
-    }
-
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGAB-E | MAİN PAGE</title>
+    <link rel="stylesheet" href="./css/mainpage.css">
+</head>
 <body>
-    <?php
-        echo "<hr>";
-        if(!empty($ownedFiles)){
-            echo "<h2>Your Files</h2>";
-            echo "<h4>Filename | Upload time</h4>";
-            foreach($ownedFiles as $line){
-                echo $line;
-            }
-        }
-        if(!empty($othersFiles)){
-            echo "<h2>Others Files</h2>";
-            echo "<h4>Username | Filename | Upload time</h4>";
-            foreach($othersFiles as $line){
-                echo $line;
-            }
-        }
-        echo "<hr>";
-    ?>
+    <nav class="nav"><h1>AGAB-E</h1>
+        <div class="dropdown">
+            <?php echo "<h2 class='dropbtn'>" . htmlspecialchars($_SESSION["username"]) . "</h2>";?>
+            <div class="dropdown-content">
+              <a href="./dersler.php">Anasayfa</a>
+            <?php
+                if($_SESSION["auth"]==1){
+                    echo "<a href='./panel.php'>Yönetim Paneli</a>";
+                    echo "<a href='#'>Oluştur</a>";
+                }
+            ?>
+              <a href="./logout.php">Çıkış yap</a>
+              <!-- <a href="#">Link 3</a> -->
+            </div>
+          </div>
+    </nav>
+    <section class="sol">
+        <h1>Dosyalarım</h1>
+        <h3>Hafta 2 / 2022-04-02</h3>
+        <div class="container">
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
 
-    <h2>UPLOAD FILE FROM HERE</h2>
-    <form method="post" action="upload.php" enctype="multipart/form-data">
-        <input type="file" name="upload" />
-        <input type="submit" value="Upload">
-    </form>
-    <?php
-    if(isset($_SESSION["uploaded"])){
-        echo "<br>" . $_SESSION["uploaded"];
-    }
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
 
-    echo "<hr>";
+            </div></a><a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
 
-    if($_SESSION["auth"]==1){
-        echo "<h3>USERS</h3>";
-        $sql = "SELECT username,last_active FROM users ORDER BY last_active DESC";
-        $result = mysqli_query($conn, $sql);
+            </div></a><a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
 
-        while ($row = mysqli_fetch_assoc($result)){
-            if (strtotime($row["last_active"])>$timeCheck){
-                echo $row["username"] . " |  Online now<br>";
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+            </div></a>
+        </div>
+        <h3>Hafta 1 / 2022-03-25</h3>
+        <div class="container">
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a><a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a><a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+            </div></a>
+
+        </div>
+
+
+
+    </section>
+
+    <section class="sag">
+        <?php
+            if($_SESSION["auth"]==1){
+                echo "<h1>Öğrenci Dosyaları</h1>";
             } else {
-                echo $row["username"] . ' |  Last active at ' . $row["last_active"] . "<br>";
+                echo "<h1>Yönetici Dosyaları</h1>";
             }
-        }
-        echo "<hr>";
-    }
-    ?>
-    <a href="/logout.php"><h3>Log OUT!</h3></a>
+        ?>
+        <h3>Hafta 3 / 2022-04-09</h3>
+        <div class="container">
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
 
-    <script>
-    </script>
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a><a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+            </div></a>
+        </div>
+        <h3>Hafta 2 / 2022-04-02</h3>
+        <div class="container">
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a><a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a><a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+            </div></a>
+        </div>
+        <h3>Hafta 1 / 2022-03-25</h3>
+        <div class="container">
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a><a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a><a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+            <a class="dersler1" href="#"> <div style="text-align:center">
+                <img src="./img/file.png" alt="">
+                <h2>sunucu yönetimi dersi hakkun</h2>
+
+            </div></a>
+        </div>
+    </section>
+    <section class="up">
+        <p>Dosyalarınızı buraya <b>sürükleyin ve bırakın</b><br>
+            ya da<br>
+         <b>bir Dosya seçin.</b><p>
+<!--
+        Dosyalarınızı buraya &nbsp; <b> sürükleyin ve bırakın&nbsp; </b>
+            ya da &nbsp;
+            <b>bir Dosya seçin.</b>
+    -->
+    </section>
 </body>
 </html>
