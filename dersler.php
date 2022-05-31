@@ -3,6 +3,12 @@
     require_once "dbconfig.php";
     date_default_timezone_set('Europe/Istanbul');
 
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: login.php");
+        exit;
+    }
+
+
     $id = $_SESSION["id"];
     $timeCheck=time()-300;
     $time=date("Y-m-d H:i:s",$timeCheck+600);
@@ -41,14 +47,14 @@
     <section class="main">
     <?php
         if($_SESSION["auth"]==1){
-            $sql = "SELECT course_name FROM courses WHERE owner_id = $id";
+            $sql = "SELECT id, course_name FROM courses WHERE owner_id = $id";
         } else{
-            $sql = "SELECT course_name FROM courses WHERE id IN (SELECT course_id FROM enroll_courses WHERE user_id = $id)";
+            $sql = "SELECT id, course_name FROM courses WHERE id IN (SELECT course_id FROM enroll_courses WHERE user_id = $id)";
         }
         $result = mysqli_query($conn, $sql);
 
         while ($row = mysqli_fetch_assoc($result)){
-            echo "<a class='dersler1' href='/mainpage.php'><div>";
+            echo "<a class='dersler1' href='/mainpage.php?course=" . $row["id"] . "'><div>";
             echo "<h2>" . $row["course_name"] . "</h2>";
             echo "</div></a>\n";
         }

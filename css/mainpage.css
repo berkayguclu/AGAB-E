@@ -5,9 +5,11 @@
 
 nav{
     padding: 25px;
+    padding-top: 15px;
     /* display: inline-block; */
 
 }
+
 
 .dropbtn {
     /* background-color: #04AA6D; */
@@ -19,6 +21,11 @@ nav{
     border-bottom: black solid 1px;
     padding: 0 12px 5px 12px;
   }
+
+.course {
+    position: relative;
+
+}
 
   .dropdown {
     /* position: relative;
@@ -172,7 +179,8 @@ font-size: 10px;
 .up{
     display: flex;
     flex-direction: column;
-    bottom: 2%;
+    bottom: 1.5%;
+    margin-top: 50px;
     width: 38%;
     height: 18%;
     position: absolute;
@@ -193,4 +201,8 @@ font-size: 10px;
     align-items: center;
     top: 0%;
     color: #000000;
+}
+
+.highlight {
+    background-color: red;
 }
