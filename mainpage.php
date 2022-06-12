@@ -74,7 +74,7 @@
         <h1>Dosyalarım</h1>
 
 <?php
-    $sql = "SELECT users.username ,files.filename, files.created_at FROM users, files WHERE users.id = files.user_id AND users.id = $id AND course_id = $courseId";
+    $sql = "SELECT users.username ,files.filename, files.created_at FROM users, files WHERE users.id = files.user_id AND users.id = $id AND course_id = $courseId ORDER BY files.created_at DESC";
 
     $result = mysqli_query($conn, $sql);
     if(!empty($result)){
@@ -102,7 +102,7 @@
 <?php
     if($_SESSION["auth"]==1){
         echo "<h1>Öğrenci Dosyaları</h1>";
-        $sql = "SELECT users.username ,files.filename, files.created_at FROM users, files WHERE users.id = files.user_id AND users.auth = 0 AND course_id = $courseId";
+        $sql = "SELECT users.username ,files.filename, files.created_at FROM users, files WHERE users.id = files.user_id AND users.auth = 0 AND course_id = $courseId ORDER BY files.created_at DESC";
 
         $result = mysqli_query($conn, $sql);
         if(!empty($result)){
@@ -125,7 +125,7 @@
 
     } else {
         echo "<h1>Yönetici Dosyaları</h1>";
-        $sql = "SELECT users.username ,files.filename, files.created_at FROM users, files WHERE users.id = files.user_id AND users.auth = 1 AND course_id = $courseId";
+        $sql = "SELECT users.username ,files.filename, files.created_at FROM users, files WHERE users.id = files.user_id AND users.auth = 1 AND course_id = $courseId ORDER BY files.created_at DESC";
 
         $result = mysqli_query($conn, $sql);
         if(!empty($result)){
