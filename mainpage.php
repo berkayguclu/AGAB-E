@@ -203,11 +203,6 @@ function handleFiles(files) {
 
 
 var fileobj;
-function upload_file(e) {
-    e.preventDefault();
-    fileobj = e.dataTransfer.files[0];
-    uploadFile(fileobj);
-}
 
 function file_explorer() {
     document.getElementById('selectfile').click();
