@@ -31,15 +31,16 @@
 
     while ($row = mysqli_fetch_assoc($result)){
         if($courseId==$row["id"]){
-            $courseName=$row["course_name"];
+            $_SESSION["courseName"]=$row["course_name"];
             $_SESSION["course_id"]=$courseId;
         }
     }
 
-    if(!isset($courseName)){
+    if(!isset($_SESSION["courseName"])){
         header("location: dersler.php");
         exit;
     }
+
 
 ?>
 <!DOCTYPE html>
@@ -54,7 +55,7 @@
 <body>
     <nav class="nav">
         <h1>AGAB-E</h1>
-        <?php echo "<p>" . $courseName . "</p>"; ?>
+        <?php echo "<p>" . $_SESSION["courseName"] . "</p>"; ?>
         <div class="dropdown">
             <?php echo "<h2 class='dropbtn'>" . htmlspecialchars($_SESSION["username"]) . "</h2>";?>
             <div class="dropdown-content">

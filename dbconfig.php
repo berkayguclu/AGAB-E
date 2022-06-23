@@ -1,8 +1,8 @@
 <?php
-$dbServer = '<IP>';
+$dbServer = '<DB_IP>';
 $dbUser = '<USER>';
 $dbPass = '<PASS>';
-$dbName = '<NAME>';
+$dbName = '<DB_NAME>';
 
 $conn = mysqli_connect($dbServer, $dbUser, $dbPass, $dbName);
 if (!($conn)){
